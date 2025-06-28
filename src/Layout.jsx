@@ -14,7 +14,7 @@ export default function Layout({ children }) {
             <div className="fixed inset-0 -z-10">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-green-500 opacity-80" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400 via-pink-400 to-yellow-400 opacity-60 mix-blend-multiply" />
-                <div className="absolute inset-0 bg-white/10 dark:bg-black/50" />
+                <div className="absolute inset-0 bg-white/5 dark:bg-black/45" />
             </div>
             <Navbar />
             <main className="relative z-10">{children}</main>

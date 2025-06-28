@@ -42,14 +42,14 @@ export default function Footer() {
                         <h4 className="text-lg font-semibold text-white mb-4">Connect</h4>
                         <div className="flex space-x-4">
                             <a
-                                href="#"
+                                href="https://x.com/jyotidip90"
                                 className="text-white/80 hover:text-white transition-colors"
                                 aria-label="Twitter"
                             >
                                 <Twitter className="w-5 h-5" />
                             </a>
                             <a
-                                href="#"
+                                href="https://www.linkedin.com/in/jyotidip-barman-bb383a21"
                                 className="text-white/80 hover:text-white transition-colors"
                                 aria-label="LinkedIn"
                             >
@@ -61,7 +61,7 @@ export default function Footer() {
 
                 <div className="border-t border-white/20 mt-8 pt-8 text-center">
                     <p className="text-white/60">
-                        &copy; 2025 <a href="https://github.com/bakshidevs" target="_blank">BakshiDevs</a>. Built with love using React, Tailwind CSS, and Appwrite.
+                        &copy; 2025 <a href="https://github.com/bakshidevs" target="_blank">BakshiDevs</a>. Built with love using React, Tailwind CSS, Zustand and Appwrite.
                     </p>
                 </div>
             </div>

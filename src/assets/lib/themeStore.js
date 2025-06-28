@@ -4,10 +4,14 @@ import { create } from "zustand";
 const useThemeStore = create((set) => ({
 	isDarkModeEnabled: true,
 	currentTheme: "dark",
-	toggleDarkMode: (isDarkModeEnabled) => set((state) => {
-		isDarkModeEnabled: !state.isDarkModeEnabled;
-		currentTheme: state.isDarkModeEnabled ? "dark" : ""
-	})
+	toggleDarkMode: () =>
+    set((state) => {
+      const nextDarkMode = !state.isDarkModeEnabled;
+      return {
+        isDarkModeEnabled: nextDarkMode,
+        currentTheme: nextDarkMode ? "dark" : "",
+      };
+    }),
 }))
 
 export default useThemeStore;
