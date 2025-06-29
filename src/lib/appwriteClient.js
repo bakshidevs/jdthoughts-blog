@@ -4,6 +4,6 @@ import { conf } from "../conf/conf";
 
 const client = new Client()
   .setEndpoint(conf.appwriteEndpoint)
-  .setProject(conf.appwriteProjectID);
+  .setProject(conf.appwriteProjectId);
 
 export default client;

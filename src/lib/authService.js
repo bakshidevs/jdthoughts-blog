@@ -1,7 +1,6 @@
-import { Account, Databases, Client, ID } from "appwrite";
+import { Account, ID } from "appwrite";
 
-// importing appwrite config
-// import { conf } from "../conf/conf";
+
 
 // importing appwrite client
 import client from "./appwriteClient";
@@ -12,11 +11,13 @@ class AuthService {
 
         this.account = new Account(client)
     }
+
+    // creating new account/user
     async createAccount({ email, password, name }) {
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
             if (userAccount) {
-                // call another method
+                // once account is created, call login method
                 return this.login({ email, password });
             } else {
                 return userAccount;
@@ -26,6 +27,7 @@ class AuthService {
         }
     }
 
+    // logging in returned user
     async login({ email, password }) {
         try {
             return await this.account.createEmailSession(email, password);
@@ -34,6 +36,7 @@ class AuthService {
         }
     }
 
+    // getting the current loggedin user
     async getCurrentUser() {
         try {
             return await this.account.get();
@@ -44,8 +47,8 @@ class AuthService {
         return null;
     }
 
+    // logging out of all the active sessions
     async logout() {
-
         try {
             await this.account.deleteSessions();
         } catch (error) {
