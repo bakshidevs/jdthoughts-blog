@@ -1,19 +1,19 @@
 import { ID, Databases } from "appwrite";
-import authService from "./appwrite";
+import authService from "./authService";
 
-import { config } from "./conf";
+import { conf } from "../conf/conf";
 
 class BlogService {
     database;
     constructor() {
         this.database = new Databases(authService.client);
     }
-    async createNewBlog(title, content) {
+    async createNewBlog({title, slug, content, featuredImage, status, userId}) {
         const user = await authService.getCurrentUser();
         try {
             this.database.createDocument(
-                config.appwriteDatabaseID, 
-                config.appwriteCollectionID, 
+                conf.appwriteDatabaseID, 
+                conf.appwriteCollectionID, 
                 ID.unique(), 
                 {
                     title,

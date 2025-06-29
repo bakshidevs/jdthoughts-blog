@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import authService from "../lib/appwrite";
+import authService from "../lib/authService";
 
 const useAuthStore = create((set) => ({
   user: null,
