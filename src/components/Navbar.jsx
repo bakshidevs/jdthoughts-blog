@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 
 // importing theme toggler from zustand theme store
-import useThemeStore from "../assets/lib/themeStore";
+import useThemeStore from "../store/themeStore";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

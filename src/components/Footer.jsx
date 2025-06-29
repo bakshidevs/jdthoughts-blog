@@ -45,6 +45,7 @@ export default function Footer() {
                                 href="https://x.com/jyotidip90"
                                 className="text-white/80 hover:text-white transition-colors"
                                 aria-label="Twitter"
+                                target="_blank"
                             >
                                 <Twitter className="w-5 h-5" />
                             </a>
@@ -52,6 +53,7 @@ export default function Footer() {
                                 href="https://www.linkedin.com/in/jyotidip-barman-bb383a21"
                                 className="text-white/80 hover:text-white transition-colors"
                                 aria-label="LinkedIn"
+                                target="_blank"
                             >
                                 <Linkedin className="w-5 h-5" />
                             </a>

@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 // importing zustand theme store
-import useThemeStore from "./assets/lib/themeStore";
+import useThemeStore from "./store/themeStore";
 
 
 
