@@ -1,4 +1,4 @@
-> ⚠️ **This README file was generated with the help of AI (GitHub Copilot). Please review and update as needed.**
+> ⚠️ **This README file was generated with the help of AI (GitHub Copilot).**
 
 # JDThoughts Blog
 
