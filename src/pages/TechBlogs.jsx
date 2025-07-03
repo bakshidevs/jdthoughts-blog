@@ -1,7 +1,21 @@
-import React from 'react'
-
+import useBlogStore from "../store/blogStore"
+import BlogCard from "../components/BlogCard"
+import dummyTechBlogs from "../dummyTechBlogs"
 export default function TechBlogs() {
+  // const {} = useBlogStore()
+  const blogs = dummyTechBlogs
+
   return (
-    <div>TechBlogs</div>
+    <div>
+      <div className="h-64 border rounded-lg flex flex-col justify-center items-center border-purple-800 bg-purple-100/20 dark:bg-purple-950/20">
+        <h1 className="font-bold text-5xl my-3 font-mono dark:text-white">Tech Blogs</h1>
+        <p className="w-2/3 text-xl text-center text-gray-100 dark:text-gray-400">Insights, tutorials, and discussions on web development, programming, and technology.</p>
+      </div>
+      <div className="p-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+        {blogs.filter(blog => blog.category === "tech").map(blog => (
+          <BlogCard blog={blog} />
+        ))}
+      </div>
+    </div>
   )
 }
