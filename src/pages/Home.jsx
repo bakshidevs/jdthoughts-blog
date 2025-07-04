@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import useAuthStore from "../store/authStore"
 import { LogOut } from "lucide-react"
+import LoadingScreen from "../components/LoadingScreen"
 
 export default function Home() {
   const { user, loading, fetchUser, logout } = useAuthStore()
@@ -11,7 +12,7 @@ export default function Home() {
     <div className="">
       Home Page!
       {loading && (
-        <div className="">Loading...</div>
+        <LoadingScreen />
       )}
       {!loading && user && (
         <div className="w-64 h-64 p-4 mx-auto my-auto bg-gradient-to-r from-amber-400 via-pink-400 to-purple-400 relative flex flex-col justify-center items-center rounded">

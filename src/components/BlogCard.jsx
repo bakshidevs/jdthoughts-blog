@@ -34,7 +34,7 @@ export default function BlogCard({ blog }) {
     }
 
   return (
-    <div className={`relative rounded-md border hover:shadow-2xl dark:text-gray-300 cursor-pointer ${cardBody}`}>
+    <div className={`relative rounded-md border hover:shadow-2xl transition duration-500 dark:text-gray-300 cursor-pointer ${cardBody}`}>
       <button className={`text-sm font-medium absolute top-2 left-2 ${categoryButton} px-2 rounded-xl border`}>
         {blog.category.slice(0, 1).toUpperCase() + blog.category.slice(1)}
       </button>

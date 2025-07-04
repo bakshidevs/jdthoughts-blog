@@ -20,7 +20,7 @@ const NotFound = () => {
           <div className="text-white/60">
             <span>Need an account? </span>
             <Link 
-              to="/login" 
+              to="/auth" 
               className="text-purple-300 hover:text-purple-200 underline font-medium transition-colors"
             >
               Login here

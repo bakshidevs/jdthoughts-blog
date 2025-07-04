@@ -1,5 +1,5 @@
 
-export default function BlogPage() {
+export default function BlogPage({ blog }) {
   return (
     <div>BlogPage</div>
   )

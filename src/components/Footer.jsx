@@ -46,6 +46,7 @@ export default function Footer() {
                                 className="text-white/80 hover:text-white transition-colors"
                                 aria-label="Twitter"
                                 target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 <Twitter className="w-5 h-5" />
                             </a>
@@ -54,6 +55,7 @@ export default function Footer() {
                                 className="text-white/80 hover:text-white transition-colors"
                                 aria-label="LinkedIn"
                                 target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 <Linkedin className="w-5 h-5" />
                             </a>
