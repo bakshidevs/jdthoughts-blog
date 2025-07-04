@@ -19,28 +19,31 @@ const useAuthStore = create((set) => ({
 
   // signup + login 
   createAccount: async ({ email, password, name }) => {
-    set({ loading: true, error: null });
-    try {
-      const session = await authService.createAccount({ email, password, name });
-      const user = await authService.getCurrentUser();
-      set({ user, loading: false });
-      return session;
-    } catch (error) {
-      set({ user: null, loading: false, error: error.message || "Signup failed" });
-    }
-  },
+  set({ loading: true, error: null });
+  try {
+    const session = await authService.createAccount({ email, password, name });
+    const user = await authService.getCurrentUser();
+    set({ user, loading: false });
+    return true;
+  } catch (error) {
+    set({ user: null, loading: false, error: error.message || "Signup failed" });
+    return false;
+  }
+},
 
   // login
   login: async ({ email, password }) => {
-    set({ loading: true, error: null });
-    try {
-      await authService.login({ email, password });
-      const user = await authService.getCurrentUser();
-      set({ user, loading: false });
-    } catch (error) {
-      set({ user: null, loading: false, error: error.message || "Login failed" });
-    }
-  },
+  set({ loading: true, error: null });
+  try {
+    await authService.login({ email, password });
+    const user = await authService.getCurrentUser();
+    set({ user, loading: false });
+    return true;
+  } catch (error) {
+    set({ user: null, loading: false, error: error.message || "Login failed" });
+    return false;
+  }
+},
 
   // logout
   logout: async () => {
