@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 
 export default function LoadingScreen() {
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-center items-center min-h-screen min-w-full backdrop-blur-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-green-500 opacity-90 animate-gradient-move">
+    <div className="fixed inset-0 z-50 flex flex-col justify-center items-center min-h-screen min-w-full backdrop-blur-2xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-green-500/20 opacity-90 animate-gradient-move">
       <motion.div
         className="relative flex items-center justify-center mb-8"
         initial={{ scale: 0.8, opacity: 0.7 }}

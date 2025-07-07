@@ -29,16 +29,10 @@ export default function App() {
           <Route path="poetry" element={<PoetryBlogs />} />
           <Route path="stories" element={<StoryBlogs />} />
           <Route path=":category(tech|poetry|stories)/:slug" element={<BlogPage />} />
-          <Route path="write" element={
-            <ProtectedRoute>
-              <Write />
-            </ProtectedRoute>
-          } />
-          <Route path="profile" element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          } />
+          <Route element={<ProtectedRoute />}>
+            <Route path="write" element={<Write />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

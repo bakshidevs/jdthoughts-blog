@@ -1,19 +1,25 @@
 import { useEffect } from "react"
 import useAuthStore from "../store/authStore"
 import { LogOut } from "lucide-react"
+import LoadingScreen from "../components/LoadingScreen"
+import FeaturedPost from "../components/FeaturedPost"
+import dummyTechBlogs from "../dummyTechBlogs"
+
 
 export default function Home() {
+  const blog = dummyTechBlogs[0]
+  
   const { user, loading, fetchUser, logout } = useAuthStore()
-  useEffect(() => {
-    fetchUser()
-  }, [])
+  // useEffect(() => {
+  //   fetchUser()
+  // }, [])
   return (
     <div className="">
       Home Page!
       {loading && (
-        <div className="">Loading...</div>
+        <LoadingScreen />
       )}
-      {!loading && user && (
+      {/* {!loading && user && (
         <div className="w-64 h-64 p-4 mx-auto my-auto bg-gradient-to-r from-amber-400 via-pink-400 to-purple-400 relative flex flex-col justify-center items-center rounded">
           <h1>Welcome, {user.name}!</h1>
           <p>{user.email}!</p>
@@ -21,7 +27,8 @@ export default function Home() {
             <LogOut className="absolute top-4 right-4" onClick={logout} />
           </button>
         </div>
-      )}
+      )} */}
+      <FeaturedPost post={blog} />
     </div>
   )
 }

@@ -1,27 +1,30 @@
-import { Account, ID } from "appwrite";
+import { Client, Account, ID } from "appwrite";
 
 
 
 // importing appwrite client
-import client from "./appwriteClient";
+// import client from "./appwriteClient";
+import { conf } from "../conf/conf";
 
 class AuthService {
+    client;
     account;
     constructor() {
-
-        this.account = new Account(client)
+        this.client = new Client().
+            setEndpoint(conf.appwriteEndpoint)
+            .setProject(conf.appwriteProjectId)
+        this.account = new Account(this.client)
     }
 
     // creating new account/user
     async createAccount({ email, password, name }) {
         try {
-            const userAccount = await this.account.create(ID.unique(), email, password, name);
-            if (userAccount) {
-                // once account is created, call login method
-                return this.login({ email, password });
-            } else {
-                return userAccount;
+            const newAccount = await this.account.create(ID.unique(), email, password, name);
+            if (newAccount) {
+                await this.login({ email, password })
+                return newAccount;
             }
+            return null;
         } catch (error) {
             throw error;
         }
@@ -30,7 +33,7 @@ class AuthService {
     // logging in returned user
     async login({ email, password }) {
         try {
-            return await this.account.createEmailSession(email, password);
+            return await this.account.createEmailPasswordSession(email, password);
         } catch (error) {
             throw error;
         }

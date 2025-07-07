@@ -71,7 +71,7 @@ export default function Login() {
                         className="w-full mt-4 py-3 bg-gradient-to-r from-purple-500 via-cyan-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold rounded-lg transition-all duration-200 shadow focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                         type="submit"
                     >
-                        Login
+                        {submitting ? "Logging In..." : "Login"}
                     </button>
                 </div>
             </div>
