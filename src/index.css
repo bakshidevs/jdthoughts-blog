@@ -13,3 +13,9 @@
     cursor: pointer;
   }
 }
+
+@layer components {
+  .wmde-markdown {
+        @apply p-6;
+    }
+}

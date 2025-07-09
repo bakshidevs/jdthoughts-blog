@@ -3,9 +3,21 @@
 import { Link } from "react-router"
 import BlogCard from "../components/BlogCard"
 import dummyTechBlogs from "../dummyTechBlogs"
+import useBlogStore from "../store/blogStore"
 
 export default function StoryBlogs() {
+  const [allStoryPosts, setAllStoryPosts] = useState()
+  const { getAllBlogs } = useBlogStore()
   const blogs = dummyTechBlogs
+  useEffect(() => {
+    const getStories = async () => {
+      const res = await getAllBlogs()
+      if (res) {
+        setAllStoryPosts(res.filter(post => post.category === "Story"))
+      }
+      getStories()
+    }
+  })
   return (
     <div>
       <div className="flex justify-center items-center flex-col h-56 dark:text-white bg-blue-900/20 border border-blue-600 rounded-lg">
@@ -14,7 +26,7 @@ export default function StoryBlogs() {
       </div>
       <div className="p-16 sm:px-0 mx-auto md:max-w-3/5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {blogs.filter(blog => blog.category === "story").map(blog => (
-          <Link to={blog.slug}>
+          <Link key={blog.slug} to={blog.slug}>
             <BlogCard blog={blog} />
           </Link>
         ))}

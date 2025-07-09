@@ -11,7 +11,6 @@ export default function BlogCard({ blog }) {
   //   userId: ""
 
   // }
-  console.log(blog);
 
   const colorMap = {
     tech: {

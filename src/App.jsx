@@ -24,11 +24,20 @@ export default function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="tech" element={<TechBlogs />} />
-          <Route path="poetry" element={<PoetryBlogs />} />
-          <Route path="stories" element={<StoryBlogs />} />
-          <Route path=":category(tech|poetry|stories)/:slug" element={<BlogPage />} />
+          <Route path="auth" element={<Auth />} />
+          <Route path="tech">
+            <Route index element={<TechBlogs />} />
+            <Route path=":slug" element={<BlogPage />} />
+          </Route>
+          <Route path="poetry">
+            <Route index element={<PoetryBlogs />} />
+            <Route path=":slug" element={<BlogPage />} />
+          </Route>
+          <Route path="stories">
+            <Route index element={<StoryBlogs />} />
+            <Route path=":slug" element={<BlogPage />} />
+          </Route>
+
           <Route element={<ProtectedRoute />}>
             <Route path="write" element={<Write />} />
             <Route path="profile" element={<Profile />} />
