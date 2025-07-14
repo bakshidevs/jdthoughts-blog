@@ -5,19 +5,15 @@ import useAuthStore from "../store/authStore";
 import { useNavigate } from "react-router";
 
 export default function Login() {
-    const { login } = useAuthStore()
+    const { login, isLoading } = useAuthStore()
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     })
     const [showPassword, setShowPassword] = useState(false);
-    const [submitting, setSubmitting] = useState(false);
     const navigate = useNavigate()
     const handleLogin = async () => {
-        if (submitting) return;
-        setSubmitting(true);
-        const success = await login(formData);
-        setSubmitting(false);
+        const { success } = await login(formData);
         if (success) navigate("/profile");
     };
 
@@ -66,12 +62,12 @@ export default function Login() {
                         </button>
                     </div>
                     <button
-                        disabled={isInvalid || submitting}
+                        disabled={isInvalid || isLoading}
                         onClick={handleLogin}
                         className="w-full mt-4 py-3 bg-gradient-to-r from-purple-500 via-cyan-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold rounded-lg transition-all duration-200 shadow focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                         type="submit"
                     >
-                        {submitting ? "Logging In..." : "Login"}
+                        {isLoading ? "Logging In..." : "Login"}
                     </button>
                 </div>
             </div>

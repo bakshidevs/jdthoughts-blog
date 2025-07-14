@@ -1,60 +1,92 @@
-import { create } from "zustand";
-import authService from "../lib/authService";
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { account, ID } from '../lib/appwrite';
 
-const useAuthStore = create((set) => ({
-  user: null,
-  loading: false,
-  error: null,
+const useAuthStore = create(
+  persist(
+    (set) => ({
+      isLoading: false,
+      isAuthenticated: false,
+      user: null,
 
-  // fetching logged-in user info
-  fetchUser: async () => {
-    set({ loading: true, error: null });
-    try {
-      const user = await authService.getCurrentUser();
-      set({ user, loading: false });
-    } catch (error) {
-      set({ user: null, loading: false, error: error.message || "Failed to fetch user" });
+      fetchUser: async () => {
+        set({ isLoading: true });
+        try {
+          const user = await account.get();
+          set({ user, isAuthenticated: true, isLoading: false });
+          return { success: true };
+        } catch (error) {
+          console.error("Error fetching user:", error);
+          set({ user: null, isAuthenticated: false });
+          return { success: false };
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+
+      signup: async ({ email, password, fullname }) => {
+        set({ isLoading: true });
+        try {
+          await account.create(ID.unique(), email, password, fullname);
+          await account.createEmailPasswordSession(email, password);
+          const user = await account.get();
+          set({ user, isAuthenticated: true });
+          return { success: true };
+        } catch (error) {
+          console.error("Error creating account:", error);
+          return { success: false };
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+
+      login: async ({ email, password }) => {
+        set({ isLoading: true });
+        try {
+          await account.createEmailPasswordSession(email, password);
+          const user = await account.get();
+          set({ user, isAuthenticated: true });
+          return { success: true };
+        } catch (error) {
+          console.error("Error logging in:", error);
+          return { success: false };
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+
+      logout: async () => {
+        try {
+          await account.deleteSession('current');
+          set({ user: null, isAuthenticated: false, isLoading: false });
+        } catch (error) {
+          console.error("Error logging out:", error);
+        }
+      },
+
+      globalLogout: async () => {
+        try {
+          await account.deleteSessions();
+          set({ user: null, isAuthenticated: false, isLoading: false });
+        } catch (error) {
+          console.error("Error logging out globally:", error);
+        }
+      },
+
+      // deleteAccount: async () => {
+      //   try {
+      //     await account.delete();
+      //     set({ user: null, isAuthenticated: false, isLoading: false });
+      //   } catch (error) {
+      //     console.error("Error deleting account:", error);
+      //   }
+      // },
+    }),
+    {
+      name: 'auth-storage',
+      storage: createJSONStorage(() => localStorage),
     }
-  },
-
-  // signup + login 
-  createAccount: async ({ email, password, name }) => {
-  set({ loading: true, error: null });
-  try {
-    const session = await authService.createAccount({ email, password, name });
-    const user = await authService.getCurrentUser();
-    set({ user, loading: false });
-    return true;
-  } catch (error) {
-    set({ user: null, loading: false, error: error.message || "Signup failed" });
-    return false;
-  }
-},
-
-  // login
-  login: async ({ email, password }) => {
-  set({ loading: true, error: null });
-  try {
-    await authService.login({ email, password });
-    const user = await authService.getCurrentUser();
-    set({ user, loading: false });
-    return true;
-  } catch (error) {
-    set({ user: null, loading: false, error: error.message || "Login failed" });
-    return false;
-  }
-},
-
-  // logout
-  logout: async () => {
-    set({ loading: true, error: null });
-    try {
-      await authService.logout();
-      set({ user: null, loading: false });
-    } catch (error) {
-      set({ loading: false, error: error.message || "Logout failed" });
-    }
-  },
-}));
+  )
+);
 
 export default useAuthStore;
