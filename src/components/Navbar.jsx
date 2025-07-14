@@ -19,7 +19,7 @@ export default function Navbar() {
         role: 'writer'
     }
 
-    const { isDarkModeEnabled, toggleDarkMode } = useThemeStore()
+    const { isDarkModeEnabled, toggleTheme } = useThemeStore()
 
     const categories = ['Stories', 'Poetry', 'Tech'];
     return (
@@ -61,7 +61,7 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center space-x-4">
                         {/* Theme Toggle */}
                         <button
-                            onClick={toggleDarkMode}
+                            onClick={toggleTheme}
                             className="text-white hover:bg-white/20 p-3 rounded"
                         >
                             {isDarkModeEnabled ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -71,7 +71,7 @@ export default function Navbar() {
                     </div>
                     {/* Mobile Actions */}
                     <div className="flex gap-4 text-white md:hidden">
-                        <button onClick={toggleDarkMode}>
+                        <button onClick={toggleTheme}>
                             {isDarkModeEnabled ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                         </button>
                         <button onClick={() => setIsMenuOpen(prevState => !prevState)}>
