@@ -4,8 +4,8 @@ import { createJSONStorage, persist } from "zustand/middleware";
 const useThemeStore = create()(
     persist(
         (set) => ({
-            isDarkModeEnabled: false,
-            theme: "light",
+            isDarkModeEnabled: true,
+            theme: "dark",
             toggleTheme: () => set((state) => {
                 const isDark = !state.isDarkModeEnabled
                 return {

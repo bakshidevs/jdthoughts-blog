@@ -12,7 +12,7 @@ export default function TextEditor() {
             <h1 className="font-bold text-3xl">TextEditor</h1>
             <MDEditor
                 style={{
-                    // minHeight: "600px"
+                    minHeight: "600px"
                 }}
                 data-color-mode={theme}
                 value={editorValue}
