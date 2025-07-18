@@ -17,6 +17,8 @@ import NotFound from "./error/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
+import ProfilePostedBlogs from "./components/ProfilePostedBlogs";
+import ProfileDrafts from "./components/ProfileDrafts";
 
 export default function App() {
   return (
@@ -40,7 +42,11 @@ export default function App() {
 
           <Route element={<ProtectedRoute />}>
             <Route path="write" element={<Write />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile" element={<Profile />}>
+              {/* Subroutes for profile page */}
+              <Route path="blogs" element={<ProfilePostedBlogs />} />
+              <Route path="drafts" element={<ProfileDrafts />} />
+            </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
