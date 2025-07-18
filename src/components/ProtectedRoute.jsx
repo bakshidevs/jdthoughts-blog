@@ -4,6 +4,6 @@ import useAuthStore from "../store/authStore";
 
 
 export default function ProtectedRoute({ children }) {
-  const { user } = useAuthStore()
-  return user ? <Outlet /> : <Navigate to="/auth" />
+  const { isAuthenticated } = useAuthStore()
+  return isAuthenticated ? <Outlet /> : <Navigate to="/auth" />
 }
