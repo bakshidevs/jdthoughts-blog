@@ -3,7 +3,7 @@ import { useState } from "react"
 
 import useAuthStore from "../store/authStore";
 import { useNavigate } from "react-router";
-import { notify } from "react-toastify";
+import { notify } from "./ui/toast";
 
 export default function Login() {
     const { login, isLoading } = useAuthStore()
