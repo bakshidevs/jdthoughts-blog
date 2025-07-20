@@ -19,8 +19,11 @@ import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
 import ProfilePostedBlogs from "./components/ProfilePostedBlogs";
 import ProfileDrafts from "./components/ProfileDrafts";
+import { ToastContainer } from "react-toastify";
+import useThemeStore from "./store/themeStore";
 
 export default function App() {
+  const { isDarkModeEnabled } = useThemeStore()
   return (
     <BrowserRouter>
       <Layout>
@@ -51,6 +54,18 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme={isDarkModeEnabled ? "dark" : "light"}
+      />
     </BrowserRouter>
   )
 }

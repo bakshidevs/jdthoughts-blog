@@ -4,6 +4,7 @@ import { useState } from "react";
 // importing authstore
 import useAuthStore from "../store/authStore";
 import { useNavigate } from "react-router";
+import { notify } from "./ui/toast";
 
 export default function Signup() {
     const { createAccount } = useAuthStore()
@@ -24,7 +25,11 @@ export default function Signup() {
         const success = await createAccount(formData);
         setSubmitting(false);
 
-        if (success) navigate("/profile");
+        if (success) {
+            navigate("/profile");
+        } else {
+            notify.error("Signup failed");
+        }
     };
     const isBlank = str => !str || str.trim() === "";
     const isInvalid =

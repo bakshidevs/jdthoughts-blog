@@ -3,6 +3,7 @@ import { useState } from "react"
 
 import useAuthStore from "../store/authStore";
 import { useNavigate } from "react-router";
+import { notify } from "react-toastify";
 
 export default function Login() {
     const { login, isLoading } = useAuthStore()
@@ -14,7 +15,11 @@ export default function Login() {
     const navigate = useNavigate()
     const handleLogin = async () => {
         const { success } = await login(formData);
-        if (success) navigate("/profile");
+        if (success) {
+            navigate("/profile");
+        } else {
+            notify.error("Login failed");
+        }
     };
 
     const isBlank = str => !str || str.trim() === "";
