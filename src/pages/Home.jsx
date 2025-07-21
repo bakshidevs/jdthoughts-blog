@@ -1,34 +1,28 @@
-import { useEffect } from "react"
-import useAuthStore from "../store/authStore"
-import { LogOut } from "lucide-react"
-import LoadingScreen from "../components/LoadingScreen"
-import FeaturedPost from "../components/FeaturedPost"
-import dummyTechBlogs from "../dummyTechBlogs"
-
+import FeaturedPost from "../components/FeaturedPost";
+import { BlogCarousel } from "../components/BlogCarousel";
+import dummyTechBlogs from "../dummyTechBlogs";
 
 export default function Home() {
-  const blog = dummyTechBlogs[0]
-  
-  const { user, loading, fetchUser, logout } = useAuthStore()
-  // useEffect(() => {
-  //   fetchUser()
-  // }, [])
+  const featuredPost = dummyTechBlogs[0];
+  const popularBlogs = dummyTechBlogs.slice(1, 5);
+  const latestBlogs = dummyTechBlogs.slice(5, 9);
+
   return (
-    <div className="">
-      Home Page!
-      {loading && (
-        <LoadingScreen />
-      )}
-      {/* {!loading && user && (
-        <div className="w-64 h-64 p-4 mx-auto my-auto bg-gradient-to-r from-amber-400 via-pink-400 to-purple-400 relative flex flex-col justify-center items-center rounded">
-          <h1>Welcome, {user.name}!</h1>
-          <p>{user.email}!</p>
-          <button>
-            <LogOut className="absolute top-4 right-4" onClick={logout} />
-          </button>
-        </div>
-      )} */}
-      <FeaturedPost post={blog} />
+    <div className="container mx-auto px-4 py-8">
+      <section className="mb-12">
+        <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Featured Post</h2>
+        <FeaturedPost post={featuredPost} />
+      </section>
+
+      <section className="mb-12">
+        <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Popular Blogs</h2>
+        <BlogCarousel blogs={popularBlogs} />
+      </section>
+
+      <section>
+        <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Latest Blogs</h2>
+        <BlogCarousel blogs={latestBlogs} />
+      </section>
     </div>
-  )
+  );
 }
