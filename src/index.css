@@ -15,7 +15,31 @@
 }
 
 @layer components {
-  .wmde-markdown {
+  /* .wmde-markdown {
         @apply p-6;
-    }
+    } */
+  .wmde-markdown-color {
+    @apply !bg-inherit;
+  }
+  .wmde-markdown-color pre, tr {
+    @apply !bg-black/15;
+  }
+  .wmde-markdown-color ol {
+    @apply list-decimal;
+  }
+  .wmde-markdown-color ul {
+    @apply list-disc;
+  }
+}
+
+.embla {
+    overflow: hidden;
+}
+.embla__container {
+    display: flex;
+}
+.embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    padding: 0 1rem;
 }
