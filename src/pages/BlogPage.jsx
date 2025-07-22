@@ -6,6 +6,7 @@ import MDEditor from "@uiw/react-md-editor";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import useBlogStore from "../store/blogStore";
+import Tags from "../components/ui/Tags";
 
 export default function BlogPage() {
   const [currentPost, setCurrentPost] = useState();
@@ -20,11 +21,12 @@ export default function BlogPage() {
     }
     // getBlog();
   })
-  console.log(params.slug);
+  console.log(slug);
   const blog = {
     title: "React: A JavaScript Library for Building User Interfaces",
     createdAt: "06/07/2025",
     author: "Bakshidevs",
+    tags: ["JavaScript", "React", "Web Development"],
     excerpt: "React is a JavaScript library for building user interfaces. It allows developers to create reusable UI components and manage the state of their applications efficiently. React's virtual DOM and component-based architecture make it a popular choice for modern web development.",
     tags: ["JavaScript", "React", "Web Development"],
     slug: "react-js-library",
@@ -213,20 +215,20 @@ Happy coding! ⚛️
     isArchived: false,
   }
   return (
-    <div className="my-12 w-full">
+    <div className="my-12 w-full text-[#c9d1d9]">
       <img aria-label="blog-thumbani" className="h-56 w-full object-center object-cover" src={blog.image} alt={blog.title} />
-      <div aria-label="blog-body" className="w-2/3 mx-auto my-12">
+      <div aria-label="blog-body" className="my-12">
         <h2 className="font-bold text-3xl">{blog.title}</h2>
         <div className="flex flex-wrap gap-2 mt-4">
-          {/* {blog.tags.map((tag, index) => (
-            <Tags key={index} tag={tag} />
-          ))} */}
+          {blog.tags.map((tag, index) => (
+            <Tags key={index} text={tag} />
+          ))}
         </div>
         <p className="text-secondary/60 dark:text-primary/60 text-sm mt-2">
-          {new Date(blog.createdAt).toLocaleDateString()} by {blog.author} - {blog.readingTime}
+          {new Date(blog.createdAt).toLocaleDateString()} by <span className="font-semibold">{blog.author}</span> - {blog.readingTime}
         </p>
         <p className="text-secondary/60 dark:text-primary/60 mt-4">{blog.excerpt}</p>
-        <div className="mt-6 prose">
+        <div className="mt-6">
           <MDEditor.Markdown className="" remarkPlugins={[remarkGfm]} source={blog.content} />
         </div>
 
