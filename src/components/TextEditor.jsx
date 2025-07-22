@@ -7,7 +7,7 @@ import useBlogStore from "../store/blogStore";
 import { useNavigate } from "react-router";
 import { X } from "lucide-react";
 
-import notify from "../components/ui/Toast"
+import { notify } from "../components/ui/Toast"
 
 export default function TextEditor() {
     const { theme } = useThemeStore();
@@ -85,7 +85,7 @@ export default function TextEditor() {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+        <div className="max-w-4xl mx-auto py-8">
             <form className="space-y-8">
                 <div className="space-y-2">
                     <label htmlFor="title" className="block text-xl font-semibold text-gray-900 dark:text-white">Blog Title</label>
@@ -137,9 +137,14 @@ export default function TextEditor() {
 
                 <div className="space-y-2">
                     <label htmlFor="image" className="block text-lg font-medium text-gray-700 dark:text-gray-300">Featured Image</label>
-                    <div onClick={handleImageContainerClick} className="mt-1 flex justify-center items-center w-full h-64 px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-md cursor-pointer">
+                    <div onClick={handleImageContainerClick} className="mt-1 flex justify-center items-center w-full h-64 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-md cursor-pointer">
                         {imagePreview ? (
-                            <img src={imagePreview} alt="Featured image preview" className="max-h-full max-w-full object-contain rounded-md" />
+                            <div className="relative w-max p-4">
+                                <button onClick={() => setImagePreview(null)} className="absolute right-0">
+                                    <X />
+                                </button>
+                                <img src={imagePreview} alt="Featured image preview" className=" rounded-md" />
+                            </div>
                         ) : (
                             <div className="space-y-1 text-center">
                                 <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
