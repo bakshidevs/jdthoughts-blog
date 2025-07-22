@@ -17,7 +17,7 @@ export default function Layout({ children }) {
                 <div className="absolute inset-0 bg-white/5 dark:bg-black/45" />
             </div>
             <Navbar />
-            <main className="relative z-10">{children}</main>
+            <main className="relative z-10 w-4/5 md:w-3/4 lg:w-2/3 mx-auto">{children}</main>
             <Footer />
         </div>
     )
