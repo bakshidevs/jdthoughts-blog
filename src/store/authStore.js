@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 import { account, ID } from '../lib/appwrite';
 
 const useAuthStore = create(
@@ -84,7 +84,6 @@ const useAuthStore = create(
     }),
     {
       name: 'auth-storage',
-      storage: createJSONStorage(() => localStorage),
     }
   )
 );
