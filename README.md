@@ -1,4 +1,3 @@
-> ⚠️ **This README file was generated with the help of AI (GitHub Copilot).**
 
 # JDThoughts Blog
 
@@ -48,7 +47,8 @@ npm install
 
 Create a `.env` file in the root directory (see `.env.example`):
 
-```
+```pseudocode
+# .env.example
 VITE_APPWRITE_ENDPOINT=your_appwrite_endpoint
 VITE_APPWRITE_PROJECT_ID=your_project_id
 VITE_APPWRITE_DATABASE_ID=your_database_id
@@ -70,7 +70,7 @@ Visit [http://localhost:8888](http://localhost:8888) to view the app.
 
 ## Project Structure
 
-```
+```pseudocode
 ├── public/                # Static assets
 ├── src/
 │   ├── App.jsx            # Main app component
@@ -96,12 +96,6 @@ Visit [http://localhost:8888](http://localhost:8888) to view the app.
 - `npm run build` — Build for production
 - `npm run preview` — Preview production build
 - `npm run lint` — Lint code with ESLint
-
----
-
-## Contributing
-
-Contributions are welcome! Please open issues or submit pull requests for improvements and bug fixes.
 
 ---
 
@@ -132,5 +126,6 @@ Contributions are welcome! Please open issues or submit pull requests for improv
 
 - Twitter: [@jyotidip90](https://x.com/jyotidip90)
 - LinkedIn: [Jyotidip Barman](https://www.linkedin.com/in/jyotidip-barman-bb383a21)
-- Email: bakshi@bakshidevs.co
+- Email: <sunandasamantaofficial@gmail.com>
 
+> ⚠️ **This README file was generated with the help of AI (GitHub Copilot).**
