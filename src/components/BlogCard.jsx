@@ -6,15 +6,15 @@ export default function BlogCard({ blog }) {
 
   const colorMap = {
     tech: {
-      cardBody: "border-purple-200 dark:border-purple-400/40 dark:bg-purple-950/20",
+      cardBody: "border-purple-200 dark:border-purple-400/40 dark:bg-purple-950/20 hover:shadow-purple-900",
       categoryButton: "text-purple-100 border-purple-600 bg-purple-900/20",
     },
     story: {
-      cardBody: "border-blue-200 dark:border-blue-400/40 dark:bg-blue-950/20",
+      cardBody: "border-blue-200 dark:border-blue-400/40 dark:bg-blue-950/20 hover:shadow-blue-900",
       categoryButton: "text-blue-100 border-blue-600 bg-blue-900/20",
     },
     poetry: {
-      cardBody: "border-pink-200 dark:border-pink-400/40 dark:bg-pink-950/20",
+      cardBody: "border-pink-200 dark:border-pink-400/40 dark:bg-pink-950/20 hover:shadow-pink-900",
       categoryButton: "text-pink-100 border-pink-600 bg-pink-900/20",
     },
   };
