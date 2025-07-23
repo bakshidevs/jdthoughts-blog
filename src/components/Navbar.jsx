@@ -22,7 +22,7 @@ export default function Navbar() {
                 <Link
                     key={category}
                     to={`/${category.toLowerCase()}`}
-                    className="text-white/90 hover:text-white transition-colors font-medium"
+                    className="text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white transition-colors font-medium"
                     onClick={() => setIsMenuOpen(false)}
                 >
                     {category}
@@ -31,7 +31,7 @@ export default function Navbar() {
             {isAuthenticated && user?.labels[0] === 'admin' && (
                 <Link
                     to="/write"
-                    className="text-white/90 hover:text-white transition-colors font-medium flex items-center space-x-1"
+                    className="text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white transition-colors font-medium flex items-center space-x-1"
                     onClick={() => setIsMenuOpen(false)}
                 >
                     <PenTool className="w-4 h-4" />
@@ -45,15 +45,15 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
             {isAuthenticated ? (
                 <>
-                    <Link to="/profile" className="text-white/90 hover:text-white transition-colors font-medium" onClick={() => setIsMenuOpen(false)}>Profile</Link>
-                    <button onClick={() => { logout(); setIsMenuOpen(false); }} className="text-white/90 hover:text-white transition-colors font-medium flex items-center gap-2">
+                    <Link to="/profile" className="text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white transition-colors font-medium" onClick={() => setIsMenuOpen(false)}>Profile</Link>
+                    <button onClick={() => { logout(); setIsMenuOpen(false); }} className="text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white transition-colors font-medium flex items-center gap-2">
                         <LogOut className="w-4 h-4" />
                         Logout
                     </button>
                 </>
             ) : (
                 <>
-                    <Link to="/auth" className="text-white/90 hover:text-white transition-colors font-medium" onClick={() => setIsMenuOpen(false)}>Login</Link>
+                    <Link to="/auth" className="text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white transition-colors font-medium" onClick={() => setIsMenuOpen(false)}>Login</Link>
                     <Link to="/auth" className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors font-medium" onClick={() => setIsMenuOpen(false)}>Signup</Link>
                 </>
             )}
@@ -79,7 +79,7 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center space-x-4">
                         <button
                             onClick={toggleTheme}
-                            className="text-white hover:bg-white/20 p-3 rounded-full"
+                            className="text-gray-600 dark:text-white hover:bg-gray-400/20 dark:hover:bg-white/20 p-3 rounded-full"
                         >
                             {isDarkModeEnabled ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                         </button>
@@ -87,7 +87,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Mobile Actions */}
-                    <div className="flex gap-4 text-white md:hidden">
+                    <div className="flex gap-4 text-gray-600 dark:text-white md:hidden">
                         <button onClick={toggleTheme}>
                             {isDarkModeEnabled ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                         </button>
