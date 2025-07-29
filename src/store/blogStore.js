@@ -1,132 +1,155 @@
 import { create } from "zustand";
-import blogService from "../lib/blogService";
+import { persist } from "zustand/middleware";
+import { databases, storage, ID } from "../lib/appwrite";
+import { conf } from "../conf/conf";
+import { Query } from "appwrite";
 
-const useBlogStore = create((set, get) => ({
-  loading: false,
-  error: null,
-  allBlogs: [],
-  currentBlog: null,
+const useBlogStore = create(
+  persist(
+    (set, get) => ({
+      blogs: [],
+      publishedBlogs: [],
+      draftedBlogs: [],
+      techBlogs: [],
+      storyBlogs: [],
+      poetryBlogs: [],
+      allBlogsByAuthor: [],
+      publishedByAuthor: [],
+      draftedByAuthor: [],
+      currentBlog: null,
+      isLoading: false,
 
-  // Get all active blogs
-  getAllBlogs: async () => {
-    set({ loading: true, error: null });
-    try {
-      const res = await blogService.getPosts();
-      set({ allBlogs: res?.documents || [], loading: false });
-    } catch (error) {
-      set({
-        error: error.message || "Failed to fetch blogs",
-        loading: false,
-      });
-    }
-  },
+      uploadThumbnail: async (file) => {
+        try {
+          const response = await storage.createFile(conf.appwriteBucketId, ID.unique(), file);
+          const fileId = response.$id;
+          const previewUrl = storage.getFileView(conf.appwriteBucketId, fileId);
+          return previewUrl;
+        } catch (error) {
+          console.error("Upload failed :: Appwrite :: ", error);
+        }
+      },
 
-  // Get a blog by slug
-  getBlogBySlug: async (slug) => {
-    set({ loading: true, error: null });
-    try {
-      const blog = await blogService.getPost(slug);
-      set({ currentBlog: blog, loading: false });
-      return blog;
-    } catch (error) {
-      set({
-        error: error.message || "Failed to fetch blog",
-        loading: false,
-      });
-      return null;
-    }
-  },
+      createBlog: async (blog) => {
+        set({ isLoading: true });
+        try {
+          const res = await databases.createDocument(
+            conf.appwriteDatabaseId,
+            conf.appwriteBlogsCollectionId,
+            ID.unique(),
+            blog
+          );
+          console.log(res);
+        } catch (error) {
+          console.error("Blog creation failure :: Appwrite :: ", error);
+        } finally {
+          set({ isLoading: false });
+        }
+      },
 
-  // Create blog
-  createBlog: async (blogData) => {
-    set({ loading: true, error: null });
-    try {
-      const newBlog = await blogService.createPost(blogData);
-      set((state) => ({
-        allBlogs: [newBlog, ...state.allBlogs],
-        loading: false,
-      }));
-      return newBlog;
-    } catch (error) {
-      set({
-        error: error.message || "Failed to create blog",
-        loading: false,
-      });
-      return null;
-    }
-  },
+      updateBlog: async (blogId, blog) => {
+        set({ isLoading: true });
+        try {
+          await databases.updateDocument(
+            conf.appwriteDatabaseId,
+            conf.appwriteBlogsCollectionId,
+            blogId,
+            blog
+          );
+        } catch (error) {
+          console.error("Blog update failure :: Appwrite :: ", error);
+        } finally {
+          set({ isLoading: false });
+        }
+      },
 
-  // Update blog
-  updateBlog: async (slug, blogData) => {
-    set({ loading: true, error: null });
-    try {
-      const updatedBlog = await blogService.updatePost(slug, blogData);
-      set((state) => ({
-        allBlogs: state.allBlogs.map((blog) =>
-          blog.$id === slug ? updatedBlog : blog
-        ),
-        loading: false,
-      }));
-      return updatedBlog;
-    } catch (error) {
-      set({
-        error: error.message || "Failed to update blog",
-        loading: false,
-      });
-      return null;
-    }
-  },
+      getAllBlogs: async () => {
+        set({ isLoading: true });
+        try {
+          const response = await databases.listDocuments(
+            conf.appwriteDatabaseId,
+            conf.appwriteBlogsCollectionId
+          );
+          if (response.documents) {
+            const allBlogs = response.documents;
+            set({
+              blogs: allBlogs,
+              publishedBlogs: allBlogs.filter(blog => blog.status === "published"),
+              draftedBlogs: allBlogs.filter(blog => blog.status === "draft"),
+              techBlogs: allBlogs.filter(blog => blog.category === "tech"),
+              storyBlogs: allBlogs.filter(blog => blog.category === "story"),
+              poetryBlogs: allBlogs.filter(blog => blog.category === "poetry"),
+            });
+          } else {
+            set({ blogs: [] });
+          }
+        } catch (error) {
+          console.error("Fetching all blogs failed :: Appwrite :: ", error);
+        } finally {
+          set({ isLoading: false });
+        }
+      },
 
-  // Delete blog
-  deleteBlog: async (slug) => {
-    set({ loading: true, error: null });
-    try {
-      const success = await blogService.deletePost(slug);
-      if (success) {
-        set((state) => ({
-          allBlogs: state.allBlogs.filter((blog) => blog.$id !== slug),
-          loading: false,
-        }));
+      getBlogBySlug: async (slug) => {
+        set({ isLoading: true });
+        try {
+          const { blogs } = get();
+          const blog = blogs.find(blog => blog.slug === slug);
+          if (blog) {
+            set({ currentBlog: blog });
+          } else {
+            const response = await databases.listDocuments(
+              conf.appwriteDatabaseId,
+              conf.appwriteBlogsCollectionId,
+              [Query.equal("slug", slug)]
+            );
+            if (response && response.documents.length > 0) {
+              set({ currentBlog: response.documents[0] });
+              console.log(response.documents);
+            } else {
+              set({ currentBlog: null });
+            }
+          }
+        } catch (error) {
+          console.error("Blog fetching failed :: Appwrite :: ", error);
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+
+      getBlogsByAuthor: async (authorId) => {
+        set({ isLoading: true });
+        try {
+          const response = await databases.listDocuments(
+            conf.appwriteDatabaseId,
+            conf.appwriteBlogsCollectionId,
+            [Query.equal("author", authorId)]
+          );
+          if (response.documents) {
+            const authoredBlogs = response.documents;
+            set({
+              allBlogsByAuthor: authoredBlogs,
+              publishedByAuthor: authoredBlogs.filter(blog => blog.status === "published"),
+              draftedByAuthor: authoredBlogs.filter(blog => blog.status === "draft")
+            });
+          } else {
+            set({
+              allBlogsByAuthor: [],
+              publishedByAuthor: [],
+              draftedByAuthor: []
+            });
+          }
+        } catch (error) {
+          console.error("Fetching user blogs failed :: Appwrite :: ", error);
+        } finally {
+          set({ isLoading: false });
+        }
       }
-      return success;
-    } catch (error) {
-      set({
-        error: error.message || "Failed to delete blog",
-        loading: false,
-      });
-      return false;
+    }),
+    {
+      name: "blog-storage",
     }
-  },
-
-  // Upload image
-  uploadFile: async (file) => {
-    try {
-      return await blogService.uploadFile(file);
-    } catch (error) {
-      set({ error: error.message || "File upload failed" });
-      return null;
-    }
-  },
-
-  // Delete image
-  deleteFile: async (fileId) => {
-    try {
-      return await blogService.deleteFile(fileId);
-    } catch (error) {
-      set({ error: error.message || "File delete failed" });
-      return false;
-    }
-  },
-
-  // Get image preview URL
-  getFilePreview: (fileId) => {
-    try {
-      return blogService.getFilePreview(fileId);
-    } catch (error) {
-      set({ error: error.message || "Preview generation failed" });
-      return null;
-    }
-  },
-}));
+  )
+);
 
 export default useBlogStore;
