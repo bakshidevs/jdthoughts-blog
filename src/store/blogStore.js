@@ -72,13 +72,14 @@ const useBlogStore = create(
           );
           if (response.documents) {
             const allBlogs = response.documents;
+            const publishedBlogs = allBlogs.filter(blog => blog.status === "published");
             set({
               blogs: allBlogs,
-              publishedBlogs: allBlogs.filter(blog => blog.status === "published"),
+              publishedBlogs: publishedBlogs,
               draftedBlogs: allBlogs.filter(blog => blog.status === "draft"),
-              techBlogs: allBlogs.filter(blog => blog.category === "tech"),
-              storyBlogs: allBlogs.filter(blog => blog.category === "story"),
-              poetryBlogs: allBlogs.filter(blog => blog.category === "poetry"),
+              techBlogs: publishedBlogs.filter(blog => blog.category === "tech"),
+              storyBlogs: publishedBlogs.filter(blog => blog.category === "story"),
+              poetryBlogs: publishedBlogs.filter(blog => blog.category === "poetry"),
             });
           } else {
             set({ blogs: [] });

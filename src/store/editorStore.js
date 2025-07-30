@@ -10,7 +10,7 @@ const useEditorStore = create(
       excerpt: "",
       category: "",
       tags: [],
-      editorValue: "## Start here",
+      editorValue: "## Write your blog content here",
 
       setStateValue: ({ name, value }) => {
         set({
