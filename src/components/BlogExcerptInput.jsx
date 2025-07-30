@@ -7,6 +7,7 @@ export default function BlogExcerpt() {
     const [charactersLeft, setCharactersLeft] = useState(256)
     return (
         <div className="relative">
+            <label htmlFor="excerpt" className="block text-lg font-medium text-gray-700 dark:text-gray-300">Excerpt</label>
             <textarea
                 className="bg-purple-500/10 dark:bg-purple-500/20 px-3 py-5 outline-0 border-2 border-purple-500/30 dark:border-purple-500/40 rounded-md w-full"
                 value={excerpt}
