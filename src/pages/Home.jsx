@@ -1,11 +1,19 @@
 import FeaturedPost from "../components/FeaturedPost";
 import { BlogCarousel } from "../components/BlogCarousel";
-import dummyTechBlogs from "../dummyTechBlogs";
+import useBlogStore from "../store/blogStore";
+import { getLatestBlogs } from "../utils/getLatestBlogs";
+import LoadingScreen from "../components/LoadingScreen";
+
 
 export default function Home() {
-  const featuredPost = dummyTechBlogs[0];
-  const popularBlogs = dummyTechBlogs.slice(1, 5);
-  const latestBlogs = dummyTechBlogs.slice(5, 9);
+  const { isLoading, publishedBlogs } = useBlogStore();
+  const featuredPost = publishedBlogs[0];
+  const popularBlogs = publishedBlogs.slice(1, 5);
+  const latestBlogs = getLatestBlogs(publishedBlogs).slice(0, 5);
+
+  if (isLoading) {
+    return <LoadingScreen />
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

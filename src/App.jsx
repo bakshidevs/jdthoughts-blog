@@ -21,8 +21,15 @@ import ProfilePostedBlogs from "./components/ProfilePostedBlogs";
 import ProfileDrafts from "./components/ProfileDrafts";
 import { ToastContainer } from "react-toastify";
 import useThemeStore from "./store/themeStore";
+import { useEffect } from "react";
+import useBlogStore from "./store/blogStore";
 
 export default function App() {
+  const { getAllBlogs } = useBlogStore();
+  // all blogs fetched each time page reloads
+  useEffect(() => {
+    getAllBlogs();
+  }, [getAllBlogs])
   const { isDarkModeEnabled } = useThemeStore()
   return (
     <BrowserRouter>

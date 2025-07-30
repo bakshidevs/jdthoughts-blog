@@ -28,7 +28,7 @@ export default function EditorActionButtons() {
             tags,
             author: user?.$id,
             username: user?.prefs.username || user?.name,
-            category,
+            category: category.toLowerCase(),
             status: status,
             isFeatured: false,
             isArchived: false,
