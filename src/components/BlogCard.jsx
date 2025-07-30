@@ -1,8 +1,12 @@
 
 
+import { Link } from "react-router";
+import Badge from "./Badge";
 import Tags from "./ui/Tags";
 
 export default function BlogCard({ blog }) {
+  const { category } = blog;
+  const blogCategory = category.toLowerCase();
 
   const colorMap = {
     tech: {
@@ -19,30 +23,31 @@ export default function BlogCard({ blog }) {
     },
   };
 
-  const {cardBody, categoryButton} = colorMap[blog.category] || {
-      cardBody: "bg-gray-100/30 border-gray-200 dark:border-gray-400/40 dark:bg-gray-950/20",
-      categoryButton: "text-gray-800 bg-gray-200/50 border-gray-300 dark:text-gray-100 dark:border-gray-600 dark:bg-gray-900/20",
-    }
+  const { cardBody, categoryButton } = colorMap[blogCategory] || {
+    cardBody: "bg-gray-100/30 border-gray-200 dark:border-gray-400/40 dark:bg-gray-950/20",
+    categoryButton: "text-gray-800 bg-gray-200/50 border-gray-300 dark:text-gray-100 dark:border-gray-600 dark:bg-gray-900/20",
+  }
 
   return (
-    <div className={`group hover:scale-103 relative rounded-md border hover:shadow-2xl transition duration-500 text-gray-800 dark:text-gray-300 cursor-pointer ${cardBody} overflow-hidden`}>
-      <button className={`text-sm z-10 font-medium absolute top-2 left-2 ${categoryButton} px-2 rounded-xl border`}>
-        {blog.category.slice(0, 1).toUpperCase() + blog.category.slice(1)}
-      </button>
-      <img className="group-hover:scale-103 transition duration-500 rounded-t-md h-52 w-full object-cover" src={blog.image} alt={blog.slug} />
-      <div className="p-4">
-        <h2 className="mb-3 font-bold text-2xl">{blog.title}</h2>
-        <div className="flex flex-wrap gap-2 my-2">
+    <Link to={`/${category}/${blog.slug}`}>
+      <div className={`group hover:scale-103 relative rounded-md border hover:shadow-2xl transition duration-500 text-gray-800 dark:text-gray-300 cursor-pointer ${cardBody} overflow-hidden`}>
+        <Badge blogCategory={blogCategory} categoryButton={categoryButton} />
+        <img className="group-hover:scale-103 transition duration-500 rounded-t-md h-52 w-full object-cover" src={blog.image} alt={blog.slug} />
+        <div className="p-4">
+          <h2 className="mb-3 font-bold text-2xl">{blog.title}</h2>
+          <div className="flex flex-wrap gap-2 my-2">
             {blog.tags.map((tag, index) => (
-                <Tags key={index} text={tag} />
+              <Tags key={index} text={tag} />
             ))}
-        </div>
-        <p className="">{blog.excerpt}</p>
-        <div className="flex justify-between my-4 ">
-          <p className="">{blog.date}</p>
-          <p className="">{blog.readTime}</p>
+          </div>
+          <p className="">{blog.excerpt}</p>
+          <div className="flex justify-between my-4 ">
+            <p className="">{new Date(blog.createdAt).toLocaleDateString()}</p>
+            <p className="">{blog.readingTime} mins read</p>
+          </div>
         </div>
       </div>
-    </div>
+
+    </Link>
   )
 }
