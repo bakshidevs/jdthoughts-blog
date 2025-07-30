@@ -1,22 +1,27 @@
-import { motion } from "framer-motion"
-
 export default function LoadingScreen() {
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-center items-center min-h-screen min-w-full backdrop-blur-2xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-green-500/20 opacity-90 animate-gradient-move">
-      <motion.div
-        className="relative flex items-center justify-center mb-8"
-        initial={{ scale: 0.8, opacity: 0.7 }}
-        animate={{ scale: [0.8, 1.1, 0.95, 1], rotate: [0, 360], opacity: [0.7, 1] }}
-        transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-      >
-        <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-purple-400 via-cyan-400 to-pink-400 animate-spin-slow shadow-2xl blur-[2px]" />
-        <div className="absolute w-16 h-16 rounded-full bg-white/20 dark:bg-black/20" />
-        <div className="absolute w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 via-blue-400 to-green-400 opacity-80 animate-pulse" />
-      </motion.div>
-      <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-purple-400 via-cyan-400 to-pink-400 bg-clip-text text-transparent mb-2 drop-shadow-lg">
-        Loading JDThoughts...
-      </h2>
-      <p className="text-lg text-white/80 dark:text-white/60 text-center animate-pulse">Bringing creativity to your screen</p>
+    <div className="fixed inset-0 z-50 flex flex-col justify-center items-center min-h-screen backdrop-blur-2xl">
+      <div className="relative w-64 h-64 flex justify-center items-center">
+        {/* Base of the thought bubble */}
+        <div className="w-32 h-32 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full animate-pulse shadow-lg"></div>
+        
+        {/* Smaller bubbles to form the cloud shape */}
+        <div className="absolute w-20 h-20 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full top-8 left-8 animate-pulse [animation-delay:'-0.2s'] shadow-md"></div>
+        <div className="absolute w-24 h-24 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full top-16 right-4 animate-pulse [animation-delay:'-0.4s'] shadow-lg"></div>
+        <div className="absolute w-16 h-16 bg-gradient-to-br from-cyan-400 to-green-500 rounded-full bottom-12 left-4 animate-pulse [animation-delay:'-0.6s'] shadow-md"></div>
+
+        {/* A small bubble to complete the thought shape */}
+        <div className="absolute w-8 h-8 bg-white/20 rounded-full bottom-8 right-20 animate-ping"></div>
+      </div>
+      
+      <div className="mt-12 text-center">
+        <h2 className="text-4xl font-extrabold text-white drop-shadow-lg">
+          JDThoughts
+        </h2>
+        <p className="text-lg text-white/75 mt-3 animate-pulse tracking-wider">
+          An idea is loading...
+        </p>
+      </div>
     </div>
-  )
+  );
 }

@@ -39,7 +39,7 @@ export default function ThumbnailUploader() {
 			{thumbnail.thumbnailFile ? (
 				<div className="relative flex gap-3">
 					<img
-						className="max-h-96"
+						className="max-h-96 rounded-md"
 						src={URL.createObjectURL(thumbnail.thumbnailFile)}
 						alt={blogTitle}
 					/>
@@ -61,7 +61,7 @@ export default function ThumbnailUploader() {
 					</div>
 				</div>
 			) : thumbnailURL ? (
-				<img className="max-h-96" src={thumbnailURL} alt={blogTitle} />
+				<img className="max-h-96 rounded-md" src={thumbnailURL} alt={blogTitle} />
 			) : (
 				<label
 					htmlFor="blog-thumbnail"

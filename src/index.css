@@ -9,37 +9,48 @@
     padding: 0;
     font-family: 'Inter', sans-serif;
   }
+
   button {
     cursor: pointer;
   }
 }
 
 @layer components {
+
   /* .wmde-markdown {
         @apply p-6;
     } */
   .wmde-markdown-color {
     @apply !bg-inherit;
   }
-  .wmde-markdown-color pre, tr {
+
+  .wmde-markdown-color pre,
+  tr {
     @apply !bg-black/15;
   }
+
   .wmde-markdown-color ol {
     @apply list-decimal;
   }
+
   .wmde-markdown-color ul {
     @apply list-disc;
+  }
+  #category > option {
+    @apply bg-yellow-400/45 dark:bg-purple-900/90 border-0;
   }
 }
 
 .embla {
-    overflow: hidden;
+  overflow: hidden;
 }
+
 .embla__container {
-    display: flex;
+  display: flex;
 }
+
 .embla__slide {
-    flex: 0 0 100%;
-    min-width: 0;
-    padding: 0 1rem;
+  flex: 0 0 100%;
+  min-width: 0;
+  padding: 0 1rem;
 }
