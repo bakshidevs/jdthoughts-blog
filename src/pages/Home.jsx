@@ -7,7 +7,6 @@ import LoadingScreen from "../components/LoadingScreen";
 
 export default function Home() {
   const { isLoading, publishedBlogs } = useBlogStore();
-  const featuredPost = publishedBlogs[0];
   const popularBlogs = publishedBlogs.slice(1, 5);
   const latestBlogs = getLatestBlogs(publishedBlogs).slice(0, 5);
 
@@ -19,7 +18,7 @@ export default function Home() {
     <div className="container mx-auto px-4 py-8">
       <section className="mb-12">
         <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Featured Post</h2>
-        <FeaturedPost post={featuredPost} />
+        <FeaturedPost />
       </section>
 
       <section className="mb-12">

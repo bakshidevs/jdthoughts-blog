@@ -6,7 +6,6 @@ import Tags from "./ui/Tags";
 
 export default function BlogCard({ blog }) {
   const { category } = blog;
-  const blogCategory = category.toLowerCase();
 
   const colorMap = {
     tech: {
@@ -23,7 +22,7 @@ export default function BlogCard({ blog }) {
     },
   };
 
-  const { cardBody, categoryButton } = colorMap[blogCategory] || {
+  const { cardBody, categoryButton } = colorMap[category] || {
     cardBody: "bg-gray-100/30 border-gray-200 dark:border-gray-400/40 dark:bg-gray-950/20",
     categoryButton: "text-gray-800 bg-gray-200/50 border-gray-300 dark:text-gray-100 dark:border-gray-600 dark:bg-gray-900/20",
   }
@@ -31,7 +30,7 @@ export default function BlogCard({ blog }) {
   return (
     <Link to={`/${category}/${blog.slug}`}>
       <div className={`group hover:scale-103 relative rounded-md border hover:shadow-2xl transition duration-500 text-gray-800 dark:text-gray-300 cursor-pointer ${cardBody} overflow-hidden`}>
-        <Badge blogCategory={blogCategory} categoryButton={categoryButton} />
+        <Badge blogCategory={category} categoryButton={categoryButton} />
         <img className="group-hover:scale-103 transition duration-500 rounded-t-md h-52 w-full object-cover" src={blog.image} alt={blog.slug} />
         <div className="p-4">
           <h2 className="mb-3 font-bold text-2xl">{blog.title}</h2>
