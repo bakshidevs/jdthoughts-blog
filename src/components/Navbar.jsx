@@ -11,7 +11,7 @@ import useAuthStore from "../store/authStore";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { loading, isAuthenticated, user, logout } = useAuthStore()
+    const { isAuthenticated, user, logout } = useAuthStore()
 
     const { isDarkModeEnabled, toggleTheme } = useThemeStore()
 
