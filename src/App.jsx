@@ -23,20 +23,15 @@ import { ToastContainer } from "react-toastify";
 import useThemeStore from "./store/themeStore";
 import { useEffect } from "react";
 import useBlogStore from "./store/blogStore";
-import useAuthStore from "./store/authStore";
 
 export default function App() {
   const { getAllBlogs } = useBlogStore();
-  const { fetchUser } = useAuthStore();
   // all blogs fetched each time page reloads
   useEffect(() => {
     getAllBlogs();
   }, [getAllBlogs])
 
-  // user fetched each time page reloads 
-  useEffect(() => {
-      fetchUser();
-  }, [fetchUser])
+
   const { isDarkModeEnabled } = useThemeStore()
   return (
     <BrowserRouter>
@@ -59,6 +54,7 @@ export default function App() {
 
           <Route element={<ProtectedRoute />}>
             <Route path="write" element={<Write />} />
+            <Route path="edit/:slug" element={<Write />} />
             <Route path="profile" element={<Profile />}>
               {/* Subroutes for profile page */}
               <Route path="blogs" element={<ProfilePostedBlogs />} />

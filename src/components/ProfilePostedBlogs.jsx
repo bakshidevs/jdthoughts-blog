@@ -1,12 +1,17 @@
+import useBlogStore from "../store/blogStore";
+import BlogList from "./BlogList";
+import { Link } from "react-router";
+
 
 export default function ProfilePostedBlogs() {
-  return (
-    <div className="p-4 bg-white/5 rounded-lg">
-      <h3 className="text-lg font-semibold text-white mb-2">Your Posted Blogs</h3>
-      {/* Replace with actual data fetching and display */}
-      <p className="text-white/70">
-        You have not posted any blogs yet. Start writing!
-      </p>
-    </div>
-  )
+    const { publishedByAuthor } = useBlogStore();
+    
+    return publishedByAuthor.length > 0 ? (
+        <BlogList blogs={publishedByAuthor} title="Posted Blogs" />
+    ) : (
+        <div className="h-full w-full flex flex-col justify-center items-center">
+            <h1 className="text-xl font-medium text-white">No posted blogs yet...</h1>
+            <Link className="text-purple-500 p-1" to="/write">Write a new blog!</Link>
+        </div>
+    )
 }

@@ -1,12 +1,15 @@
+import { Link } from "react-router";
+import useBlogStore from "../store/blogStore";
+import BlogList from "./BlogList";
 
 export default function ProfileDrafts() {
-    return (
-        <div className="p-4 bg-white/5 rounded-lg">
-            <h3 className="text-lg font-semibold text-white mb-2">Your Drafts</h3>
-            {/* Replace with actual data fetching and display */}
-            <p className="text-white/70">
-                You have no drafts. Continue your work!
-            </p>
+    const { draftedByAuthor } = useBlogStore();
+    return draftedByAuthor.length > 0 ? (
+        <BlogList blogs={draftedByAuthor} title="Drafts" />
+    ) : (
+        <div className="h-full w-full flex flex-col justify-center items-center">
+            <h1 className="text-xl font-medium">No drafted blogs yet...</h1>
+            <Link className="text-olive p-1" to="/write">Write a new blog!</Link>
         </div>
     )
 }

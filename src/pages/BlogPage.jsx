@@ -12,14 +12,13 @@ import useThemeStore from "../store/themeStore.js";
 export default function BlogPage() {
   const { theme } = useThemeStore();
   const { getBlogBySlug, currentBlog, isLoading } = useBlogStore();
-  const param = useParams();
-  console.log(param.slug);
+  const { slug } = useParams();
 
   useEffect(() => {
-    if (param.slug) {
-      getBlogBySlug(param.slug);
+    if (slug) {
+      getBlogBySlug(slug);
     }
-  }, [param.slug, getBlogBySlug])
+  }, [slug, getBlogBySlug])
 
   if (isLoading) {
     return <LoadingScreen />
@@ -30,9 +29,9 @@ export default function BlogPage() {
 
   return blog && !isLoading ? (
     <div className="my-12 w-full text-secondary dark:text-[#c9d1d9]">
-      <img aria-label="blog-thumbani" className="h-56 w-full object-center object-cover" src={blog.image} alt={blog.title} />
       <div aria-label="blog-body" className="my-12">
         <h2 className="font-bold text-3xl">{blog.title}</h2>
+        <img aria-label="blog-thumbani" className="max-h-84 h-auto object-cover mx-auto my-4 rounded-md" src={blog.image} alt={blog.title} />
         <div className="flex flex-wrap gap-2 mt-4">
           {blog.tags.map((tag, index) => (
             <Tags key={index} text={tag} />
