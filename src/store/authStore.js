@@ -24,7 +24,7 @@ const useAuthStore = create(
         }
       },
 
-      signup: async ({ email, password, fullname }) => {
+      createAccount: async ({ email, password, fullname }) => {
         set({ isLoading: true });
         try {
           await account.create(ID.unique(), email, password, fullname);

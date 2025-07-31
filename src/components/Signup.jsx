@@ -10,7 +10,7 @@ export default function Signup() {
     const { createAccount } = useAuthStore()
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
-        name: "",
+        fullname: "",
         email: "",
         password: "",
         confirmPassword: ""
@@ -33,6 +33,7 @@ export default function Signup() {
     };
     const isBlank = str => !str || str.trim() === "";
     const isInvalid =
+        isBlank(formData.fullname) ||
         isBlank(formData.email) ||
         isBlank(formData.password) ||
         isBlank(formData.confirmPassword) ||
@@ -46,12 +47,12 @@ export default function Signup() {
                 <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 via-cyan-400 to-pink-400 bg-clip-text text-transparent">Sign Up</h2>
                 <div className="flex flex-col gap-4">
                     <input
-                        value={formData.name}
+                        value={formData.fullname}
                         onChange={(e) => setFormData(prevFormData => ({ ...prevFormData, [e.target.name]: e.target.value }))}
                         className="w-full p-3 border border-gray-300/30 dark:border-gray-700/50 rounded focus:outline-none focus:ring-2 focus:ring-purple-400/40 bg-white/10 dark:bg-black/20 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                         type="text"
-                        name="name"
-                        id="name"
+                        name="fullname"
+                        id="fullname"
                         placeholder="Enter your name"
                         required
                     />
