@@ -29,9 +29,9 @@ export default function BlogCard({ blog }) {
 
   return (
     <Link to={`/${category}/${blog.slug}`}>
-      <div className={`group hover:scale-103 relative rounded-md border hover:shadow-2xl transition duration-500 text-gray-800 dark:text-gray-300 cursor-pointer ${cardBody} overflow-hidden`}>
+      <div className={`hover:scale-103 relative h-full rounded-md border hover:shadow-2xl transition duration-500 text-gray-800 dark:text-gray-300 cursor-pointer ${cardBody} overflow-hidden`}>
         <Badge blogCategory={category} categoryButton={categoryButton} />
-        <img className="group-hover:scale-103 transition duration-500 rounded-t-md h-52 w-full object-cover" src={blog.image} alt={blog.slug} />
+        <img className="transition duration-500 rounded-t-md h-52 w-full object-cover" src={blog.image} alt={blog.slug} />
         <div className="p-4">
           <h2 className="mb-3 font-bold text-2xl">{blog.title}</h2>
           <div className="flex flex-wrap gap-2 my-2">
@@ -46,7 +46,6 @@ export default function BlogCard({ blog }) {
           </div>
         </div>
       </div>
-
     </Link>
   )
 }

@@ -33,13 +33,12 @@ const useBlogStore = create(
       createBlog: async (blog) => {
         set({ isLoading: true });
         try {
-          const res = await databases.createDocument(
+          await databases.createDocument(
             conf.appwriteDatabaseId,
             conf.appwriteBlogsCollectionId,
             ID.unique(),
             blog
           );
-          console.log(res);
         } catch (error) {
           console.error("Blog creation failure :: Appwrite :: ", error);
         } finally {
@@ -106,7 +105,6 @@ const useBlogStore = create(
             );
             if (response && response.documents.length > 0) {
               set({ currentBlog: response.documents[0] });
-              console.log(response.documents);
             } else {
               set({ currentBlog: null });
             }

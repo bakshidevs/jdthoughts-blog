@@ -80,7 +80,7 @@ export default function EditorActionButtons() {
             }
             if (currentBlog.$id) {
                 await updateBlog(currentBlog.$id, blogData);
-                navigate(`/blog/${slug}`);
+                navigate(`/${category}/${slug}`);
                 resetValue();
             }
         }

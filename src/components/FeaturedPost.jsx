@@ -6,7 +6,7 @@ import Tags from "./ui/Tags";
 export default function FeaturedPost() {
     const { publishedBlogs } = useBlogStore();
     const featuredPost = publishedBlogs[0];
-    return (
+    return featuredPost ? (
         <Link to={`/${featuredPost.category}/${featuredPost.slug}`}>
             <div className="group relative rounded-md w-full mx-auto overflow-hidden cursor-pointer">
                 <img className="w-full h-80 object-cover" src={featuredPost.image} alt="" />
@@ -28,5 +28,5 @@ export default function FeaturedPost() {
                 </div>
             </div>
         </Link>
-    )
+    ) : null;
 }
