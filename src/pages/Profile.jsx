@@ -15,8 +15,13 @@ export default function Profile() {
 
   const { getBlogsByAuthor } = useBlogStore();
 
-  const { user, logout } = useAuthStore();
+  const { user, fetchUser, logout } = useAuthStore();
   const location = useLocation();
+
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
 
   useEffect(() => {
@@ -65,6 +70,9 @@ export default function Profile() {
               <UserIcon className="h-8 w-8" />
               {user.name}
             </h2>
+            {user?.prefs?.username && (
+              <p className="text-lg text-secondary/70 text-yellow-600 dark:text-purple-600 font-thin">@{user?.prefs.username}</p>
+            )}
             <p className="text-gray-300 mt-1 flex items-center gap-2">
               <Pencil className="h-4 w-4" />
               {user.email}
@@ -74,26 +82,41 @@ export default function Profile() {
       </div>
       <nav className="mt-4">
         <ul className="flex space-x-4 border-b border-white/20">
+          {user?.labels.includes("admin") && (
+            <>
+              <li>
+                <Link
+                  to="blogs"
+                  className={`py-2 px-4 ${location.pathname.endsWith("blogs")
+                    ? "text-purple-300 border-b-2 border-purple-300"
+                    : "text-white hover:text-purple-300"
+                    }`}
+                >
+                  Your Blogs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="drafts"
+                  className={`py-2 px-4 ${location.pathname.endsWith("drafts")
+                    ? "text-purple-300 border-b-2 border-purple-300"
+                    : "text-white hover:text-purple-300"
+                    }`}
+                >
+                  Drafts
+                </Link>
+              </li>
+            </>
+          )}
           <li>
             <Link
-              to="blogs"
-              className={`py-2 px-4 ${location.pathname.endsWith("blogs")
+              to="saved"
+              className={`py-2 px-4 ${location.pathname.endsWith("saved")
                 ? "text-purple-300 border-b-2 border-purple-300"
                 : "text-white hover:text-purple-300"
                 }`}
             >
-              Your Blogs
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="drafts"
-              className={`py-2 px-4 ${location.pathname.endsWith("drafts")
-                ? "text-purple-300 border-b-2 border-purple-300"
-                : "text-white hover:text-purple-300"
-                }`}
-            >
-              Drafts
+              Saved Blogs
             </Link>
           </li>
         </ul>

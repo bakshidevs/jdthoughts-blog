@@ -15,7 +15,7 @@ export const BlogCarousel = ({ blogs }) => {
             ))}
           </div>
         </div>
-        <div className="hidden md:grid md:grid-cols-2 xl:grid-cols-3 col-span-full gap-8">
+        <div className="hidden md:grid md:grid-cols-2 2xl:grid-cols-3 col-span-full gap-8">
             {blogs.map(blog => (
                 <BlogCard key={blog.$id} blog={blog} />
             ))}

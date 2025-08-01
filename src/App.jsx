@@ -23,6 +23,7 @@ import { ToastContainer } from "react-toastify";
 import useThemeStore from "./store/themeStore";
 import { useEffect } from "react";
 import useBlogStore from "./store/blogStore";
+import AdminRoutes from "./protected/AdminRoutes";
 
 export default function App() {
   const { getAllBlogs } = useBlogStore();
@@ -52,13 +53,19 @@ export default function App() {
             <Route path=":slug" element={<BlogPage />} />
           </Route>
 
-          <Route element={<ProtectedRoute />}>
+          {/* Admin only routes */}
+          <Route element={<AdminRoutes />}>
             <Route path="write" element={<Write />} />
             <Route path="edit/:slug" element={<Write />} />
+          </Route>
+
+          <Route element={<ProtectedRoute />}>
             <Route path="profile" element={<Profile />}>
-              {/* Subroutes for profile page */}
-              <Route path="blogs" element={<ProfilePostedBlogs />} />
-              <Route path="drafts" element={<ProfileDrafts />} />
+              {/* Subroutes for profile page with admin access */}
+              <Route element={<AdminRoutes />}>
+                <Route path="blogs" element={<ProfilePostedBlogs />} />
+                <Route path="drafts" element={<ProfileDrafts />} />
+              </Route>
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

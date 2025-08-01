@@ -1,8 +1,6 @@
-
-
-import { Link } from "react-router";
 import BlogCard from "../components/BlogCard";
 import useBlogStore from "../store/blogStore";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function StoryBlogs() {
 

@@ -1,6 +1,5 @@
 import useBlogStore from "../store/blogStore"
 import BlogCard from "../components/BlogCard"
-import { Link } from "react-router"
 import LoadingScreen from "../components/LoadingScreen"
 export default function TechBlogs() {
 
