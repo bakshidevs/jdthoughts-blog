@@ -72,6 +72,23 @@ const useAuthStore = create(
         }
       },
 
+      uploadProfilePicture: async (imageURL) => {
+        try {
+          const { user } = get();
+          const prevPrefs = user?.prefs
+          if (!prevPrefs) {
+            console.error("No previous preferences found.");
+            return;
+          }
+          await account.updatePrefs({
+            ...prevPrefs,
+            profilePicture: imageURL,
+          });
+        } catch (error) {
+          console.error("Error uploading profile image:", error);
+        }
+      },
+
       logout: async () => {
         try {
           await account.deleteSession('current');
