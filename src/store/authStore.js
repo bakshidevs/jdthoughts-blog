@@ -4,7 +4,7 @@ import { account, ID } from '../lib/appwrite';
 
 const useAuthStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       isLoading: false,
       isAuthenticated: false,
       user: null,
@@ -52,6 +52,23 @@ const useAuthStore = create(
           return { success: false };
         } finally {
           set({ isLoading: false });
+        }
+      },
+
+      addUsername: async (username) => {
+        try {
+          const { user } = get();
+          const prevPrefs = user?.prefs
+          if (!prevPrefs) {
+            console.error("No previous preferences found.");
+            return;
+          }
+          await account.updatePrefs({
+            ...prevPrefs,
+            username
+          });
+        } catch (error) {
+          console.error("Error adding username:", error);
         }
       },
 
