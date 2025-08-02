@@ -18,7 +18,7 @@ export default function AddUsername({ isUsernameEditing, setIsUsernameEditing, e
     }
     return (
         <form onSubmit={handleSubmit} className="flex gap-2 my-1">
-            <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Enter your username" className="bg-pink-950/10 px-2 py-1 outline-0 focus:outline-1 focus:outline-pink-500 text-pink-50 rounded-md" />
+            <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" name="username" id="username" placeholder="Enter your username" className="bg-pink-950/10 px-2 py-1 outline-0 focus:outline-1 focus:outline-pink-500 text-pink-50 rounded-md" />
             <button type="submit" className="bg-purple-500 text-pink-100 px-2 py-1 rounded-md hover:bg-purple-500/80 transition-colors">
                 <Check />
             </button>

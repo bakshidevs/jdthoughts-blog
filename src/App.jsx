@@ -48,7 +48,7 @@ export default function App() {
             <Route index element={<PoetryBlogs />} />
             <Route path=":slug" element={<BlogPage />} />
           </Route>
-          <Route path="stories">
+          <Route path="story">
             <Route index element={<StoryBlogs />} />
             <Route path=":slug" element={<BlogPage />} />
           </Route>
