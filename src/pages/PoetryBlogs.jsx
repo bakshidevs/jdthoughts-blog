@@ -12,9 +12,9 @@ export default function PoetryBlogs() {
 
   return (
     <div>
-      <div className="my-12 h-56 border rounded-lg flex flex-col justify-center items-center border-pink-800 bg-pink-100/20 dark:bg-pink-900/25">
-        <h1 className="font-bold text-5xl my-3 font-mono dark:text-white">Poetry</h1>
-        <p className="w-2/3 text-xl text-center text-gray-100 dark:text-gray-400">
+      <div className="my-12 h-56 p-8 border rounded-lg flex flex-col justify-center items-center border-pink-800 bg-pink-100/20 dark:bg-pink-900/25">
+        <h1 className="font-bold text-3xl text-center lg:text-5xl my-3 font-mono dark:text-white">Poetry</h1>
+        <p className="lg:w-2/3 text-sm lg:text-xl text-center text-gray-100 dark:text-gray-400">
           Verses that capture moments, emotions, and the spaces between words.
         </p>
       </div>

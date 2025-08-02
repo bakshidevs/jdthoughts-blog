@@ -4,9 +4,9 @@ export default function ProfileBlogsSection({ user }) {
     const location = useLocation();
     return (
         <>
-            <nav className="mt-4">
-                <ul className="flex space-x-4 border-b border-white/20">
-                    {user?.labels.includes("admin") && (
+            {user?.labels.includes("admin") && (
+                <nav className="mt-4">
+                    <ul className="flex space-x-4 border-b border-white/20">
                         <>
                             <li>
                                 <Link
@@ -31,20 +31,9 @@ export default function ProfileBlogsSection({ user }) {
                                 </Link>
                             </li>
                         </>
-                    )}
-                    <li>
-                        <Link
-                            to="saved"
-                            className={`py-2 px-4 ${location.pathname.endsWith("saved")
-                                ? "text-purple-300 border-b-2 border-purple-300"
-                                : "text-white hover:text-purple-300"
-                                }`}
-                        >
-                            Saved Blogs
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
+                    </ul>
+                </nav>
+            )}
 
             <div className="mt-6">
                 {/* Shared UI for Blogs and Drafts */}
