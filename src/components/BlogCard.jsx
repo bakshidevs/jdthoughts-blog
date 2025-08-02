@@ -39,7 +39,7 @@ export default function BlogCard({ blog }) {
               <Tags key={index} text={tag} />
             ))}
           </div>
-          <p className="">{blog.excerpt}</p>
+          <p className="">{blog.excerpt.slice(0, 150) + "..."}</p>
           <div className="flex justify-between my-4 ">
             <p className="">{new Date(blog.createdAt).toLocaleDateString()}</p>
             <p className="">{blog.readingTime} mins read</p>
