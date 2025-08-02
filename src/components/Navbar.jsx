@@ -15,7 +15,7 @@ export default function Navbar() {
 
     const { isDarkModeEnabled, toggleTheme } = useThemeStore()
 
-    const categories = ['Stories', 'Poetry', 'Tech'];
+    const categories = ['Story', 'Poetry', 'Tech'];
     const navLinks = (
         <>
             {categories.map((category) => (

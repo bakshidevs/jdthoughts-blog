@@ -90,6 +90,17 @@ const useBlogStore = create(
         }
       },
 
+      deleteBlog: async (blogId) => {
+        set({ isLoading: true });
+        try {
+          await databases.deleteDocument(conf.appwriteDatabaseId, conf.appwriteBlogsCollectionId, blogId);
+        } catch (error) {
+          console.error("Document deletion failed :: Appwrite :: ", error);
+        } finally {
+          set({ isLoading: false });
+        }
+      },
+
       getBlogBySlug: async (slug) => {
         set({ isLoading: true });
         try {

@@ -9,11 +9,23 @@ import EditorActionButtons from "./EditorActionButtons";
 import BlogExcerpt from "./BlogExcerptInput";
 import BlogCategorySelection from "./BlogCategorySelection";
 import BlogTagsInput from "./BlogTagsInput";
+import { useEffect } from "react";
+import { useParams } from "react-router";
 
 export default function TextEditor() {
     const { theme } = useThemeStore();
-    const { editorValue, setEditorValue } = useEditorStore();
+    const { editorValue, setEditorValue, resetValue } = useEditorStore();
 
+    const { slug } = useParams();
+
+    // resets the editor value on component unmount (only when something was being edited)
+    useEffect(() => {
+        if (slug) {
+            return () => {
+                resetValue();
+            }
+        }
+    }, [resetValue, slug])
 
     return (
         <div className="max-w-4xl mx-auto py-8 dark:text-white">
