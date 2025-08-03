@@ -8,8 +8,8 @@ export default function ProfileDrafts() {
         <BlogList blogs={draftedByAuthor} title="Drafts" />
     ) : (
         <div className="h-full w-full flex flex-col justify-center items-center">
-            <h1 className="text-xl font-medium">No drafted blogs yet...</h1>
-            <Link className="text-olive p-1" to="/write">Write a new blog!</Link>
+            <h1 className="text-xl font-medium text-pink-100">No drafted blogs yet...</h1>
+            <Link className="text-purple-500 p-1" to="/write">Write a new blog!</Link>
         </div>
     )
 }

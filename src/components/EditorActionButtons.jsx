@@ -16,9 +16,17 @@ export default function EditorActionButtons() {
     const params = useParams();
     const editBlogSlug = params.slug;
 
+    const isBlank = str => !str || str.trim() === "";
+    const isEmpty = arr => !arr || arr.length === 0;
+
+
 
     // handle creation of a new blog and resets the editor after blog publishing is successful
     const handleCreateBlog = async (status) => {
+        if (isBlank(blogTitle) || isBlank(slug) || isBlank(excerpt) || isBlank(editorValue) || isEmpty(tags) || isBlank(category)) {
+            notify.warning("Please fill in all fields.");
+            return;
+        }
         const blogData = {
             title: blogTitle,
             slug: slug,
@@ -28,7 +36,7 @@ export default function EditorActionButtons() {
             tags,
             author: user?.$id,
             username: user?.prefs.username || user?.name,
-            category: category.toLowerCase(),
+            category: category,
             status: status,
             isFeatured: false,
             isArchived: false,
@@ -61,6 +69,7 @@ export default function EditorActionButtons() {
                 setStateValue({ name: "tags", value: currentBlog.tags });
                 setEditorValue(currentBlog.content);
                 setStateValue({ name: "thumbnailURL", value: currentBlog.image });
+                setStateValue({ name: "category", value: currentBlog.category });
             }
         }
     }, [editBlogSlug, getBlogBySlug, resetValue, currentBlog, setStateValue, setEditorValue])
@@ -75,6 +84,9 @@ export default function EditorActionButtons() {
                 content: editorValue,
                 tags,
                 status: status,
+                category: category,
+                image: thumbnailURL ? thumbnailURL : currentBlog.image,
+                username: user?.prefs.username || user?.name,
                 updatedAt: new Date().toISOString(),
                 readingTime: editorValue ? Math.ceil(editorValue.split(' ').length / 200) : 1,
             }

@@ -1,4 +1,4 @@
-import { LogOut, Menu, Moon, PenTool, Sun, X } from "lucide-react";
+import { LogOut, Menu, Moon, PenTool, Sun, User, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 
@@ -8,10 +8,15 @@ import useThemeStore from "../store/themeStore";
 
 // importing authServices from store
 import useAuthStore from "../store/authStore";
+import useViewport from "../hooks/useViewport";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { isAuthenticated, user, logout } = useAuthStore()
+    const { isAuthenticated, user, logout } = useAuthStore();
+
+    const { isMobile } = useViewport();
+
+    const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
     const { isDarkModeEnabled, toggleTheme } = useThemeStore()
 
@@ -44,13 +49,33 @@ export default function Navbar() {
     const authLinks = (
         <div className="flex items-center gap-2">
             {isAuthenticated ? (
-                <>
-                    <Link to="/profile" className="text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white transition-colors font-medium" onClick={() => setIsMenuOpen(false)}>Profile</Link>
-                    <button onClick={() => { logout(); setIsMenuOpen(false); }} className="text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white transition-colors font-medium flex items-center gap-2">
-                        <LogOut className="w-4 h-4" />
-                        Logout
-                    </button>
-                </>
+                <div className="relative">
+                    {isMobile ? (
+                        <div onClick={() => setIsProfileMenuOpen(prevState => !prevState)} className="cursor-pointer">
+                            {user?.prefs.profilePicture ? (<img className="w-14 h-14 object-cover border-2 border-white rounded-full" src={user?.prefs.profilePicture} alt={user?.name} />) : (<User className="w-4 h-4" />)}
+                        </div>
+                    ) : (
+                        <Link to="/profile">
+                            <div className="cursor-pointer">
+                                {user?.prefs.profilePicture ? (<img className="w-14 h-14 object-cover border-2 border-white rounded-full" src={user?.prefs.profilePicture} alt={user?.name} />) : (<User className="w-4 h-4" />)}
+                            </div>
+                        </Link>
+                    )}
+                    {isProfileMenuOpen && !isMobile && (
+                        <div className="w-40 text-xl absolute py-2 z-10 top-16 right-10 border rounded-md border-indigo-500 bg-purple-900/40 text-white" onClick={() => setIsProfileMenuOpen(prevState => !prevState)}>
+                            <Link to="/profile" className="" onClick={() => setIsMenuOpen(false)}>
+                                <button className="p-2 rounded-md hover:bg-indigo-500/40 w-full text-left">
+                                    Profile
+                                </button>
+                            </Link>
+                            <hr className="text-indigo-500/40 my-1" />
+                            <button onClick={() => { logout(); setIsMenuOpen(false); }} className="flex gap-2 items-center p-2 rounded-md hover:bg-indigo-500/40 w-full">
+                                <LogOut className="w-4 h-4" />
+                                Logout
+                            </button>
+                        </div>
+                    )}
+                </div>
             ) : (
                 <>
                     <Link to="/auth" className="text-gray-600 dark:text-white/90 hover:text-gray-900 dark:hover:text-white transition-colors font-medium" onClick={() => setIsMenuOpen(false)}>Login</Link>
