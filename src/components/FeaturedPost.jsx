@@ -2,10 +2,11 @@
 import { Link } from "react-router";
 import useBlogStore from "../store/blogStore";
 import Tags from "./ui/Tags";
+import { getFeaturedPost } from "../utils/getFeaturedPost";
 
 export default function FeaturedPost() {
     const { publishedBlogs } = useBlogStore();
-    const featuredPost = publishedBlogs[0];
+    const featuredPost = getFeaturedPost(publishedBlogs);
     return featuredPost ? (
         <Link to={`/${featuredPost.category}/${featuredPost.slug}`}>
             <div className="group relative rounded-md w-full mx-auto overflow-hidden cursor-pointer">
