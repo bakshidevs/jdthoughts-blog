@@ -33,7 +33,7 @@ export default function Login() {
         <div className="flex items-center justify-center min-h-[300px]">
             <div className="w-full max-w-md p-8 rounded-2xl shadow-2xl border border-white/20 bg-white/10 dark:bg-black/30 backdrop-blur-lg">
                 <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 via-cyan-400 to-pink-400 bg-clip-text text-transparent">Login</h2>
-                <div className="flex flex-col gap-4">
+                <form onSubmit={handleLogin} className="flex flex-col gap-4">
                     <input
                         value={formData.email}
                         onChange={(e) => setFormData(prevFormData => ({ ...prevFormData, [e.target.name]: e.target.value }))}
@@ -74,7 +74,7 @@ export default function Login() {
                     >
                         {isLoading ? "Logging In..." : "Login"}
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     )

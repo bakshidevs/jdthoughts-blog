@@ -40,10 +40,14 @@ export default function TextEditor() {
                 </div>
 
                 <div className="space-y-2">
-                    <label className="block text-xl font-semibold">Content</label>
+                    <label htmlFor="content-editor" className="block text-xl font-semibold">Content</label>
                     <MDEditor
                         style={{
                             minHeight: "650px",
+                        }}
+                        textareaProps={{
+                            id: "content-editor",
+                            name: "content-editor",
                         }}
                         data-color-mode={theme}
                         value={editorValue}

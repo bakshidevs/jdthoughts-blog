@@ -45,7 +45,7 @@ export default function Signup() {
         <div className="flex items-center justify-center min-h-[400px]">
             <div className="w-full max-w-md p-8 rounded-2xl shadow-2xl border border-white/20 bg-white/10 dark:bg-black/30 backdrop-blur-lg">
                 <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 via-cyan-400 to-pink-400 bg-clip-text text-transparent">Sign Up</h2>
-                <div className="flex flex-col gap-4">
+                <form onSubmit={handleSignup} className="flex flex-col gap-4">
                     <input
                         value={formData.fullname}
                         onChange={(e) => setFormData(prevFormData => ({ ...prevFormData, [e.target.name]: e.target.value }))}
@@ -114,11 +114,10 @@ export default function Signup() {
                         disabled={isInvalid || submitting}
                         className="w-full mt-4 py-3 bg-gradient-to-r from-purple-500 via-cyan-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold rounded-lg transition-all duration-200 shadow focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                         type="submit"
-                        onClick={handleSignup}
                     >
-                        Signup
+                        {submitting ? "Signing up..." : "Sign Up"}
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     );

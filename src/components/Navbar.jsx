@@ -50,7 +50,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
             {isAuthenticated ? (
                 <div className="relative">
-                    {isMobile ? (
+                    {!isMobile ? (
                         <div onClick={() => setIsProfileMenuOpen(prevState => !prevState)} className="cursor-pointer">
                             {user?.prefs.profilePicture ? (<img className="w-14 h-14 object-cover border-2 border-white rounded-full" src={user?.prefs.profilePicture} alt={user?.name} />) : (<User className="w-4 h-4" />)}
                         </div>

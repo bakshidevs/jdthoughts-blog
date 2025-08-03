@@ -16,6 +16,7 @@ export default function BlogExcerpt() {
                     setStateValue({ name: "excerpt", value: e.target.value })
                     setCharactersLeft(256 - e.target.value.length)
                 }}
+                id="excerpt"
                 rows={4}
                 maxLength={256}
                 placeholder="Write blog descript within 256 characters..."
