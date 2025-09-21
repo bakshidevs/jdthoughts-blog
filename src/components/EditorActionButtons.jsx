@@ -86,7 +86,7 @@ export default function EditorActionButtons() {
                 status: status,
                 category: category,
                 image: thumbnailURL ? thumbnailURL : currentBlog.image,
-                username: user?.prefs.username || user?.name,
+                username: user?.name,
                 updatedAt: new Date().toISOString(),
                 readingTime: editorValue ? Math.ceil(editorValue.split(' ').length / 200) : 1,
             }
