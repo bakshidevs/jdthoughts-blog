@@ -53,7 +53,6 @@ export default function BlogPage() {
       )}
       <div aria-label="blog-body" className="my-12">
         <h2 className="font-bold text-3xl">{currentBlog.title}</h2>
-        <p>{currentBlog.username}</p>
         <img
           aria-label="blog-thumbani"
           className="max-h-84 h-auto object-cover mx-auto my-4 rounded-md"
@@ -65,9 +64,11 @@ export default function BlogPage() {
             <Tags key={index} text={tag} />
           ))}
         </div>
+        <p className="mt-2">
+           By{" "}<span className="font-semibold">{currentBlog.username}</span>
+        </p>
         <p className="text-secondary/60  text-sm mt-2">
-          {new Date(currentBlog.createdAt).toLocaleDateString()} by{" "}
-          <span className="font-semibold">{currentBlog.username}</span> -{" "}
+          {new Date(currentBlog.createdAt).toLocaleDateString()} -{" "}
           {currentBlog.readingTime} min read
         </p>
         <p className="text-secondary/80 mt-4">{currentBlog.excerpt}</p>

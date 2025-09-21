@@ -13,7 +13,8 @@ export default function FeaturedPost() {
                 <img className="w-full h-80 object-cover" src={featuredPost.image} alt="" />
                 <div className="group absolute inset-0 bg-black/20 dark:bg-black/40 hover:bg-black/70 text transition-all duration-500 top-0 rounded-md">
                     <div className="absolute bottom-0 p-6 text-white">
-                        <h2 className="text-2xl md:text-4xl group-hover:underline font-bold my-1">{featuredPost.title}</h2>
+                        <h2 className="text-2xl md:text-4xl group-hover:underline font-bold mt-1">{featuredPost.title}</h2>
+                        <p className="mb-2 text-sm font-semibold">{featuredPost.username}</p>
                         <div className="flex flex-wrap gap-2 text-xs font-medium">
                             {featuredPost.tags.map((tag, index) => (
                                 <Tags key={index} text={tag} />
