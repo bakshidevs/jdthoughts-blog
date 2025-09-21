@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export default function Footer() {
     const handleWriterInquiry = () => {
-        window.location.href = 'mailto:bakshi@bakshidevs.co?subject=Writer Application&body=Hi, I would like to become a writer for your blog platform.';
+        window.location.href = 'mailto:jyotidip.barman@gmail.com?subject=Writer Application&body=Hi, I would like to become a writer for your blog platform.';
     };
     return (
         <footer
@@ -65,7 +65,7 @@ export default function Footer() {
 
                 <div className="border-t border-white/20 mt-8 pt-8 text-center">
                     <p className="text-white/60">
-                        &copy; 2025 <a href="https://github.com/bakshidevs" target="_blank">BakshiDevs</a>. Built with love using React, Tailwind CSS, Zustand and Appwrite.
+                        &copy; 2025 <a className="font-semibold" href="https://github.com/bakshidevs" target="_blank">BakshiDevs</a>. Built with love using React, Tailwind CSS, Zustand and Appwrite.
                     </p>
                 </div>
             </div>
