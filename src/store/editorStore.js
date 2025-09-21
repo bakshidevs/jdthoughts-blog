@@ -21,9 +21,11 @@ const useEditorStore = create(
       generateSlug: () => {
         const { blogTitle } = get();
         const blogSlug = blogTitle
+          .normalize("NFKC")
+          .replace(/[.,!?;:'"।॥\-(){}[\]<>/@#$%^&*_+=~`|\\]/g, "")
           .replace(/\s+/g, "-")
-          .toLowerCase()
-          .replace(/[^\w-]+/g, "");
+          .replace(/^-+|-+$/g, "")
+          .toLowerCase();
         set({ slug: blogSlug });
       },
 
