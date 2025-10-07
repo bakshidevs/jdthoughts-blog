@@ -134,7 +134,7 @@ const useBlogStore = create(
           const response = await databases.listDocuments(
             conf.appwriteDatabaseId,
             conf.appwriteBlogsCollectionId,
-            [Query.equal("author", authorId)]
+            [Query.equal("author", authorId), Query.orderDesc("$createdAt")]
           );
           if (response.documents) {
             const authoredBlogs = response.documents;
