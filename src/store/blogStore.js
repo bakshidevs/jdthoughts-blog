@@ -67,7 +67,8 @@ const useBlogStore = create(
         try {
           const response = await databases.listDocuments(
             conf.appwriteDatabaseId,
-            conf.appwriteBlogsCollectionId
+            conf.appwriteBlogsCollectionId,
+            [Query.orderDesc("$createdAt")]
           );
           if (response.documents) {
             const allBlogs = response.documents;
