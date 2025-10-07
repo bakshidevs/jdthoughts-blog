@@ -68,6 +68,7 @@ const useBlogStore = create(
           const response = await databases.listDocuments(
             conf.appwriteDatabaseId,
             conf.appwriteBlogsCollectionId,
+            // gets all blogs in descending order, latest blog first
             [Query.orderDesc("$createdAt")]
           );
           if (response.documents) {
@@ -113,7 +114,8 @@ const useBlogStore = create(
             const response = await databases.listDocuments(
               conf.appwriteDatabaseId,
               conf.appwriteBlogsCollectionId,
-              [Query.equal("slug", slug)]
+              // get all blogs with same slug in descending order, latest blog first
+              [Query.equal("slug", slug), Query.orderDesc("$createdAt")]
             );
             if (response && response.documents.length > 0) {
               set({ currentBlog: response.documents[0] });
@@ -134,6 +136,7 @@ const useBlogStore = create(
           const response = await databases.listDocuments(
             conf.appwriteDatabaseId,
             conf.appwriteBlogsCollectionId,
+            // gets all blogs by a particular author in descending order
             [Query.equal("author", authorId), Query.orderDesc("$createdAt")]
           );
           if (response.documents) {
